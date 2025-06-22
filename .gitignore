@@ -1,0 +1,17 @@
+# node modules (auto-generated dependencies)
+node_modules/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Compiled JavaScript (from TypeScript)
+frontend/dist/
+
+# Editor junk
+.vscode/
+.idea/
+
+# Python cache
+__pycache__/
+*.pyc
+.venv
