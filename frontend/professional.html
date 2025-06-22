@@ -7,44 +7,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-    <script>
-    function toggleTimeline(button) {
-        const container = button.closest('[data-timeline]');
-        const mainText = container.querySelector('[data-main-text]');
-        const bullet = container.querySelector('[data-main-bullet]');
-        const extraItems = container.querySelectorAll('[data-extra-item]');
-        const extraTexts = container.querySelectorAll('[data-extra-text]');
-        const seeMoreBtn = container.querySelector('[data-see-more]');
-        const seeLessBtnWrapper = container.querySelector('[data-see-less-wrapper]');
-
-        const expanded = container.classList.toggle('expanded');
-
-        if (expanded) {
-            bullet.classList.replace('bg-gray-400', 'bg-white');
-            mainText.classList.remove('line-clamp-1', 'text-gray-300', 'italic');
-            mainText.classList.add('text-white', 'not-italic');
-            extraItems.forEach(el => el.classList.remove('hidden'));
-            extraTexts.forEach(el => {
-                el.classList.remove('text-gray-300', 'italic');
-                el.classList.add('text-white', 'not-italic');
-            });
-            seeMoreBtn.classList.add('hidden');
-            seeLessBtnWrapper.classList.remove('hidden');
-        } 
-        else {
-            bullet.classList.replace('bg-white', 'bg-gray-400');
-            mainText.classList.add('line-clamp-1', 'text-gray-300', 'italic');
-            mainText.classList.remove('text-white', 'not-italic');
-            extraItems.forEach(el => el.classList.add('hidden'));
-            extraTexts.forEach(el => {
-                el.classList.add('text-gray-300', 'italic');
-                el.classList.remove('text-white', 'not-italic');
-            });
-            seeMoreBtn.classList.remove('hidden');
-            seeLessBtnWrapper.classList.add('hidden');
+    <style>
+        .transition-max-height {
+            transition: max-height 0.5s ease-in-out;
         }
-    }
-    </script>
+    </style>
+    <script type="module" src="./dist/timeline.js"></script>
+
 
 </head>
 
@@ -71,61 +40,67 @@
                     <p class = "font-bold pb-2">North Jersey Transport Authority</p>
                     <p class = "text-white italic pb-1">Web and App Dev</p>
                     <p>
-                        <ul class="space-y-5" data-timeline>
+                        <ul data-timeline>
+                            <!-- First bullet -->
                             <li class="relative">
                                 <span class="absolute top-1.5 left-2 w-2 h-2 bg-gray-400 rounded-full z-10" data-main-bullet></span>
-
                                 <div class="flex justify-between items-start pl-6 pr-2">
                                 <div class="flex flex-col flex-1">
                                     <p class="line-clamp-1 text-gray-300 italic transition-all duration-300 text-sm" data-main-text>
-                                    This is the summary bullet that might overflow if it gets long.
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.
                                     </p>
-                                    <button
-                                    onclick="toggleTimeline(this)"
-                                    data-see-more
-                                    class="self-start text-gray-300 italic text-sm hover:underline mt-1"
-                                    >
-                                    ...see more <span>▼</span>
-                                    </button>
                                 </div>
-
                                 <div class="text-gray-300 italic text-xs whitespace-nowrap ml-2">April – June</div>
                                 </div>
                             </li>
 
-                            <!-- Hidden bullets -->
-                            <li class="relative hidden" data-extra-item>
+                            <!-- Expandable content -->
+                            <div class="transition-max-height duration-500 overflow-hidden max-h-0" data-extra-wrapper>
+                                <!-- Second bullet -->
+                                <li class="relative hidden" data-extra-item>
                                 <span class="absolute top-1.5 left-2 w-2 h-2 bg-white rounded-full z-10"></span>
                                 <div class="flex justify-between items-start pl-6 pr-2">
-                                <p class="text-gray-300 italic transition-all duration-300 flex-1 text-sm" data-extra-text>
-                                    Second bullet after expansion.
-                                </p>
-                                <div class="text-gray-300 italic text-xs pl-4">July – Sept</div>
+                                    <p class="text-white not-italic transition-all duration-300 flex-1 text-sm" data-extra-text>
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.
+                                    </p>
+                                    <div class="text-gray-300 italic text-xs pl-4">July – Sept</div>
                                 </div>
-                            </li>
+                                </li>
 
-                            <li class="relative hidden" data-extra-item>
+                                <!-- Third bullet -->
+                                <li class="relative hidden" data-extra-item>
                                 <span class="absolute top-1.5 left-2 w-2 h-2 bg-white rounded-full z-10"></span>
                                 <div class="flex justify-between items-start pl-6 pr-2">
-                                <p class="text-gray-300 italic transition-all duration-300 flex-1 text-sm" data-extra-text>
-                                    Third expanded bullet point.
-                                </p>
-                                <div class="text-gray-300 italic text-xs pl-4">Oct – Dec</div>
+                                    <p class="text-white not-italic transition-all duration-300 flex-1 text-sm" data-extra-text>
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.
+                                    </p>
+                                    <div class="text-gray-300 italic text-xs pl-4">Oct – Dec</div>
                                 </div>
-                            </li>
+                                </li>
 
-                            <!-- See less -->
-                            <div class="flex justify-end mt-2 hidden" data-see-less-wrapper>
+                                <!-- See less -->
+                                <div class="flex justify-end mt-2 hidden" data-see-less-wrapper>
+                                <button
+                                    onclick="toggleTimeline(this)"
+                                    class="text-blue-400 text-sm hover:underline flex items-center gap-1"
+                                >
+                                    See less <span>▲</span>
+                                </button>
+                                </div>
+                            </div>
+
+                            <!-- See more -->
+                            <div class="flex justify-end mt-2" data-see-more-wrapper>
                                 <button
                                 onclick="toggleTimeline(this)"
+                                data-see-more
                                 class="text-blue-400 text-sm hover:underline flex items-center gap-1"
                                 >
-                                See less <span>▲</span>
+                                ...see more <span>▼</span>
                                 </button>
                             </div>
                         </ul>
                         <hr class="border-t-2 border-white my-4" />
-
                     </p> 
                 </div>
                 <!--Accompanying Image-->
@@ -143,56 +118,63 @@
                     <p class = "font-bold pb-2">Colgate Palmolive</p>
                     <p class = "text-white italic pb-1">Software and Application Dev Intern</p>
                     <p>
-                        <ul class="space-y-5" data-timeline>
+                        <ul data-timeline>
+                            <!-- First bullet -->
                             <li class="relative">
                                 <span class="absolute top-1.5 left-2 w-2 h-2 bg-gray-400 rounded-full z-10" data-main-bullet></span>
-
                                 <div class="flex justify-between items-start pl-6 pr-2">
                                 <div class="flex flex-col flex-1">
                                     <p class="line-clamp-1 text-gray-300 italic transition-all duration-300 text-sm" data-main-text>
                                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.
                                     </p>
-                                    <button
-                                    onclick="toggleTimeline(this)"
-                                    data-see-more
-                                    class="self-start text-gray-300 italic text-sm hover:underline mt-1"
-                                    >
-                                    ...see more <span>▼</span>
-                                    </button>
                                 </div>
-
                                 <div class="text-gray-300 italic text-xs whitespace-nowrap ml-2">April – June</div>
                                 </div>
                             </li>
 
-                            <!-- Hidden bullets -->
-                            <li class="relative hidden" data-extra-item>
+                            <!-- Expandable content -->
+                            <div class="transition-max-height duration-500 overflow-hidden max-h-0" data-extra-wrapper>
+                                <!-- Second bullet -->
+                                <li class="relative hidden" data-extra-item>
                                 <span class="absolute top-1.5 left-2 w-2 h-2 bg-white rounded-full z-10"></span>
                                 <div class="flex justify-between items-start pl-6 pr-2">
-                                <p class="text-gray-300 italic transition-all duration-300 flex-1 text-sm" data-extra-text>
-                                    of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in.
-                                </p>
-                                <div class="text-gray-300 italic text-xs pl-4">July – Sept</div>
+                                    <p class="text-white not-italic transition-all duration-300 flex-1 text-sm" data-extra-text>
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.
+                                    </p>
+                                    <div class="text-gray-300 italic text-xs pl-4">July – Sept</div>
                                 </div>
-                            </li>
+                                </li>
 
-                            <li class="relative hidden" data-extra-item>
+                                <!-- Third bullet -->
+                                <li class="relative hidden" data-extra-item>
                                 <span class="absolute top-1.5 left-2 w-2 h-2 bg-white rounded-full z-10"></span>
                                 <div class="flex justify-between items-start pl-6 pr-2">
-                                <p class="text-gray-300 italic transition-all duration-300 flex-1 text-sm" data-extra-text>
-                                    the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                                </p>
-                                <div class="text-gray-300 italic text-xs pl-4">Oct – Dec</div>
+                                    <p class="text-white not-italic transition-all duration-300 flex-1 text-sm" data-extra-text>
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.
+                                    </p>
+                                    <div class="text-gray-300 italic text-xs pl-4">Oct – Dec</div>
                                 </div>
-                            </li>
+                                </li>
 
-                            <!-- See less -->
-                            <div class="flex justify-end mt-2 hidden" data-see-less-wrapper>
+                                <!-- See less -->
+                                <div class="flex justify-end mt-2 hidden" data-see-less-wrapper>
+                                <button
+                                    onclick="toggleTimeline(this)"
+                                    class="text-blue-400 text-sm hover:underline flex items-center gap-1"
+                                >
+                                    See less <span>▲</span>
+                                </button>
+                                </div>
+                            </div>
+
+                            <!-- See more -->
+                            <div class="flex justify-end mt-2" data-see-more-wrapper>
                                 <button
                                 onclick="toggleTimeline(this)"
+                                data-see-more
                                 class="text-blue-400 text-sm hover:underline flex items-center gap-1"
                                 >
-                                See less <span>▲</span>
+                                ...see more <span>▼</span>
                                 </button>
                             </div>
                         </ul>
@@ -214,56 +196,63 @@
                     <p class = "font-bold pb-2">Fross Zelnick Lehrman Zissu</p>
                     <p class = "text-white italic pb-1">AP Accounting Intern</p>
                     <p>
-                        <ul class="space-y-5" data-timeline>
+                        <ul data-timeline>
+                            <!-- First bullet -->
                             <li class="relative">
                                 <span class="absolute top-1.5 left-2 w-2 h-2 bg-gray-400 rounded-full z-10" data-main-bullet></span>
-
                                 <div class="flex justify-between items-start pl-6 pr-2">
                                 <div class="flex flex-col flex-1">
                                     <p class="line-clamp-1 text-gray-300 italic transition-all duration-300 text-sm" data-main-text>
-                                    This is the summary bullet that might overflow if it gets long.
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.
                                     </p>
-                                    <button
-                                    onclick="toggleTimeline(this)"
-                                    data-see-more
-                                    class="self-start text-gray-300 italic text-sm hover:underline mt-1"
-                                    >
-                                    ...see more <span>▼</span>
-                                    </button>
                                 </div>
-
                                 <div class="text-gray-300 italic text-xs whitespace-nowrap ml-2">April – June</div>
                                 </div>
                             </li>
 
-                            <!-- Hidden bullets -->
-                            <li class="relative hidden" data-extra-item>
+                            <!-- Expandable content -->
+                            <div class="transition-max-height duration-500 overflow-hidden max-h-0" data-extra-wrapper>
+                                <!-- Second bullet -->
+                                <li class="relative hidden" data-extra-item>
                                 <span class="absolute top-1.5 left-2 w-2 h-2 bg-white rounded-full z-10"></span>
                                 <div class="flex justify-between items-start pl-6 pr-2">
-                                <p class="text-gray-300 italic transition-all duration-300 flex-1 text-sm" data-extra-text>
-                                    Second bullet after expansion.
-                                </p>
-                                <div class="text-gray-300 italic text-xs pl-4">July – Sept</div>
+                                    <p class="text-white not-italic transition-all duration-300 flex-1 text-sm" data-extra-text>
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.
+                                    </p>
+                                    <div class="text-gray-300 italic text-xs pl-4">July – Sept</div>
                                 </div>
-                            </li>
+                                </li>
 
-                            <li class="relative hidden" data-extra-item>
+                                <!-- Third bullet -->
+                                <li class="relative hidden" data-extra-item>
                                 <span class="absolute top-1.5 left-2 w-2 h-2 bg-white rounded-full z-10"></span>
                                 <div class="flex justify-between items-start pl-6 pr-2">
-                                <p class="text-gray-300 italic transition-all duration-300 flex-1 text-sm" data-extra-text>
-                                    Third expanded bullet point.
-                                </p>
-                                <div class="text-gray-300 italic text-xs pl-4">Oct – Dec</div>
+                                    <p class="text-white not-italic transition-all duration-300 flex-1 text-sm" data-extra-text>
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.
+                                    </p>
+                                    <div class="text-gray-300 italic text-xs pl-4">Oct – Dec</div>
                                 </div>
-                            </li>
+                                </li>
 
-                            <!-- See less -->
-                            <div class="flex justify-end mt-2 hidden" data-see-less-wrapper>
+                                <!-- See less -->
+                                <div class="flex justify-end mt-2 hidden" data-see-less-wrapper>
+                                <button
+                                    onclick="toggleTimeline(this)"
+                                    class="text-blue-400 text-sm hover:underline flex items-center gap-1"
+                                >
+                                    See less <span>▲</span>
+                                </button>
+                                </div>
+                            </div>
+
+                            <!-- See more -->
+                            <div class="flex justify-end mt-2" data-see-more-wrapper>
                                 <button
                                 onclick="toggleTimeline(this)"
+                                data-see-more
                                 class="text-blue-400 text-sm hover:underline flex items-center gap-1"
                                 >
-                                See less <span>▲</span>
+                                ...see more <span>▼</span>
                                 </button>
                             </div>
                         </ul>
@@ -285,56 +274,63 @@
                     <p class = "font-bold pb-2">NJIT Van Huouten Library</p>
                     <p class = "text-white italic pb-1">Frontend Web Dev Part Time</p>
                     <p>
-                        <ul class="space-y-5" data-timeline>
+                        <ul data-timeline>
+                            <!-- First bullet -->
                             <li class="relative">
                                 <span class="absolute top-1.5 left-2 w-2 h-2 bg-gray-400 rounded-full z-10" data-main-bullet></span>
-
                                 <div class="flex justify-between items-start pl-6 pr-2">
                                 <div class="flex flex-col flex-1">
                                     <p class="line-clamp-1 text-gray-300 italic transition-all duration-300 text-sm" data-main-text>
-                                    This is the summary bullet that might overflow if it gets long.
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.
                                     </p>
-                                    <button
-                                    onclick="toggleTimeline(this)"
-                                    data-see-more
-                                    class="self-start text-gray-300 italic text-sm hover:underline mt-1"
-                                    >
-                                    ...see more <span>▼</span>
-                                    </button>
                                 </div>
-
                                 <div class="text-gray-300 italic text-xs whitespace-nowrap ml-2">April – June</div>
                                 </div>
                             </li>
 
-                            <!-- Hidden bullets -->
-                            <li class="relative hidden" data-extra-item>
+                            <!-- Expandable content -->
+                            <div class="transition-max-height duration-500 overflow-hidden max-h-0" data-extra-wrapper>
+                                <!-- Second bullet -->
+                                <li class="relative hidden" data-extra-item>
                                 <span class="absolute top-1.5 left-2 w-2 h-2 bg-white rounded-full z-10"></span>
                                 <div class="flex justify-between items-start pl-6 pr-2">
-                                <p class="text-gray-300 italic transition-all duration-300 flex-1 text-sm" data-extra-text>
-                                    Second bullet after expansion.
-                                </p>
-                                <div class="text-gray-300 italic text-xs pl-4">July – Sept</div>
+                                    <p class="text-white not-italic transition-all duration-300 flex-1 text-sm" data-extra-text>
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.
+                                    </p>
+                                    <div class="text-gray-300 italic text-xs pl-4">July – Sept</div>
                                 </div>
-                            </li>
+                                </li>
 
-                            <li class="relative hidden" data-extra-item>
+                                <!-- Third bullet -->
+                                <li class="relative hidden" data-extra-item>
                                 <span class="absolute top-1.5 left-2 w-2 h-2 bg-white rounded-full z-10"></span>
                                 <div class="flex justify-between items-start pl-6 pr-2">
-                                <p class="text-gray-300 italic transition-all duration-300 flex-1 text-sm" data-extra-text>
-                                    Third expanded bullet point.
-                                </p>
-                                <div class="text-gray-300 italic text-xs pl-4">Oct – Dec</div>
+                                    <p class="text-white not-italic transition-all duration-300 flex-1 text-sm" data-extra-text>
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.
+                                    </p>
+                                    <div class="text-gray-300 italic text-xs pl-4">Oct – Dec</div>
                                 </div>
-                            </li>
+                                </li>
 
-                            <!-- See less -->
-                            <div class="flex justify-end mt-2 hidden" data-see-less-wrapper>
+                                <!-- See less -->
+                                <div class="flex justify-end mt-2 hidden" data-see-less-wrapper>
+                                <button
+                                    onclick="toggleTimeline(this)"
+                                    class="text-blue-400 text-sm hover:underline flex items-center gap-1"
+                                >
+                                    See less <span>▲</span>
+                                </button>
+                                </div>
+                            </div>
+
+                            <!-- See more -->
+                            <div class="flex justify-end mt-2" data-see-more-wrapper>
                                 <button
                                 onclick="toggleTimeline(this)"
+                                data-see-more
                                 class="text-blue-400 text-sm hover:underline flex items-center gap-1"
                                 >
-                                See less <span>▲</span>
+                                ...see more <span>▼</span>
                                 </button>
                             </div>
                         </ul>
@@ -356,56 +352,63 @@
                     <p class = "font-bold pb-2">NJIT Ying Wu Collge of Computing</p>
                     <p class = "text-white italic pb-1">Research Assistant</p>
                     <p>
-                        <ul class="space-y-5" data-timeline>
+                        <ul data-timeline>
+                            <!-- First bullet -->
                             <li class="relative">
                                 <span class="absolute top-1.5 left-2 w-2 h-2 bg-gray-400 rounded-full z-10" data-main-bullet></span>
-
                                 <div class="flex justify-between items-start pl-6 pr-2">
                                 <div class="flex flex-col flex-1">
                                     <p class="line-clamp-1 text-gray-300 italic transition-all duration-300 text-sm" data-main-text>
-                                    This is the summary bullet that might overflow if it gets long.
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.
                                     </p>
-                                    <button
-                                    onclick="toggleTimeline(this)"
-                                    data-see-more
-                                    class="self-start text-gray-300 italic text-sm hover:underline mt-1"
-                                    >
-                                    ...see more <span>▼</span>
-                                    </button>
                                 </div>
-
                                 <div class="text-gray-300 italic text-xs whitespace-nowrap ml-2">April – June</div>
                                 </div>
                             </li>
 
-                            <!-- Hidden bullets -->
-                            <li class="relative hidden" data-extra-item>
+                            <!-- Expandable content -->
+                            <div class="transition-max-height duration-500 overflow-hidden max-h-0" data-extra-wrapper>
+                                <!-- Second bullet -->
+                                <li class="relative hidden" data-extra-item>
                                 <span class="absolute top-1.5 left-2 w-2 h-2 bg-white rounded-full z-10"></span>
                                 <div class="flex justify-between items-start pl-6 pr-2">
-                                <p class="text-gray-300 italic transition-all duration-300 flex-1 text-sm" data-extra-text>
-                                    Second bullet after expansion.
-                                </p>
-                                <div class="text-gray-300 italic text-xs pl-4">July – Sept</div>
+                                    <p class="text-white not-italic transition-all duration-300 flex-1 text-sm" data-extra-text>
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.
+                                    </p>
+                                    <div class="text-gray-300 italic text-xs pl-4">July – Sept</div>
                                 </div>
-                            </li>
+                                </li>
 
-                            <li class="relative hidden" data-extra-item>
+                                <!-- Third bullet -->
+                                <li class="relative hidden" data-extra-item>
                                 <span class="absolute top-1.5 left-2 w-2 h-2 bg-white rounded-full z-10"></span>
                                 <div class="flex justify-between items-start pl-6 pr-2">
-                                <p class="text-gray-300 italic transition-all duration-300 flex-1 text-sm" data-extra-text>
-                                    Third expanded bullet point.
-                                </p>
-                                <div class="text-gray-300 italic text-xs pl-4">Oct – Dec</div>
+                                    <p class="text-white not-italic transition-all duration-300 flex-1 text-sm" data-extra-text>
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.
+                                    </p>
+                                    <div class="text-gray-300 italic text-xs pl-4">Oct – Dec</div>
                                 </div>
-                            </li>
+                                </li>
 
-                            <!-- See less -->
-                            <div class="flex justify-end mt-2 hidden" data-see-less-wrapper>
+                                <!-- See less -->
+                                <div class="flex justify-end mt-2 hidden" data-see-less-wrapper>
+                                <button
+                                    onclick="toggleTimeline(this)"
+                                    class="text-blue-400 text-sm hover:underline flex items-center gap-1"
+                                >
+                                    See less <span>▲</span>
+                                </button>
+                                </div>
+                            </div>
+
+                            <!-- See more -->
+                            <div class="flex justify-end mt-2" data-see-more-wrapper>
                                 <button
                                 onclick="toggleTimeline(this)"
+                                data-see-more
                                 class="text-blue-400 text-sm hover:underline flex items-center gap-1"
                                 >
-                                See less <span>▲</span>
+                                ...see more <span>▼</span>
                                 </button>
                             </div>
                         </ul>
@@ -427,56 +430,63 @@
                     <p class = "font-bold pb-2">First Tech Challenge</p>
                     <p class = "text-white italic pb-1">Robotics Instructor</p>
                     <p>
-                        <ul class="space-y-5" data-timeline>
+                        <ul data-timeline>
+                            <!-- First bullet -->
                             <li class="relative">
                                 <span class="absolute top-1.5 left-2 w-2 h-2 bg-gray-400 rounded-full z-10" data-main-bullet></span>
-
                                 <div class="flex justify-between items-start pl-6 pr-2">
                                 <div class="flex flex-col flex-1">
                                     <p class="line-clamp-1 text-gray-300 italic transition-all duration-300 text-sm" data-main-text>
-                                    This is the summary bullet that might overflow if it gets long.
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.
                                     </p>
-                                    <button
-                                    onclick="toggleTimeline(this)"
-                                    data-see-more
-                                    class="self-start text-gray-300 italic text-sm hover:underline mt-1"
-                                    >
-                                    ...see more <span>▼</span>
-                                    </button>
                                 </div>
-
                                 <div class="text-gray-300 italic text-xs whitespace-nowrap ml-2">April – June</div>
                                 </div>
                             </li>
 
-                            <!-- Hidden bullets -->
-                            <li class="relative hidden" data-extra-item>
+                            <!-- Expandable content -->
+                            <div class="transition-max-height duration-500 overflow-hidden max-h-0" data-extra-wrapper>
+                                <!-- Second bullet -->
+                                <li class="relative hidden" data-extra-item>
                                 <span class="absolute top-1.5 left-2 w-2 h-2 bg-white rounded-full z-10"></span>
                                 <div class="flex justify-between items-start pl-6 pr-2">
-                                <p class="text-gray-300 italic transition-all duration-300 flex-1 text-sm" data-extra-text>
-                                    Second bullet after expansion.
-                                </p>
-                                <div class="text-gray-300 italic text-xs pl-4">July – Sept</div>
+                                    <p class="text-white not-italic transition-all duration-300 flex-1 text-sm" data-extra-text>
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.
+                                    </p>
+                                    <div class="text-gray-300 italic text-xs pl-4">July – Sept</div>
                                 </div>
-                            </li>
+                                </li>
 
-                            <li class="relative hidden" data-extra-item>
+                                <!-- Third bullet -->
+                                <li class="relative hidden" data-extra-item>
                                 <span class="absolute top-1.5 left-2 w-2 h-2 bg-white rounded-full z-10"></span>
                                 <div class="flex justify-between items-start pl-6 pr-2">
-                                <p class="text-gray-300 italic transition-all duration-300 flex-1 text-sm" data-extra-text>
-                                    Third expanded bullet point.
-                                </p>
-                                <div class="text-gray-300 italic text-xs pl-4">Oct – Dec</div>
+                                    <p class="text-white not-italic transition-all duration-300 flex-1 text-sm" data-extra-text>
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.
+                                    </p>
+                                    <div class="text-gray-300 italic text-xs pl-4">Oct – Dec</div>
                                 </div>
-                            </li>
+                                </li>
 
-                            <!-- See less -->
-                            <div class="flex justify-end mt-2 hidden" data-see-less-wrapper>
+                                <!-- See less -->
+                                <div class="flex justify-end mt-2 hidden" data-see-less-wrapper>
+                                <button
+                                    onclick="toggleTimeline(this)"
+                                    class="text-blue-400 text-sm hover:underline flex items-center gap-1"
+                                >
+                                    See less <span>▲</span>
+                                </button>
+                                </div>
+                            </div>
+
+                            <!-- See more -->
+                            <div class="flex justify-end mt-2" data-see-more-wrapper>
                                 <button
                                 onclick="toggleTimeline(this)"
+                                data-see-more
                                 class="text-blue-400 text-sm hover:underline flex items-center gap-1"
                                 >
-                                See less <span>▲</span>
+                                ...see more <span>▼</span>
                                 </button>
                             </div>
                         </ul>

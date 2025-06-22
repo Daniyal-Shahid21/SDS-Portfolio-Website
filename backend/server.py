@@ -31,6 +31,14 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_header("Content-type", "image/png")
                 self.end_headers()
                 self.wfile.write(image)
+                
+        if path.endswith(".js"):
+            with open(full_path, "rb") as f:
+                js = f.read()
+                self.send_response(200)
+                self.send_header("Content-type", "text/javascript")
+                self.end_headers()
+                self.wfile.write(js)
 
         
 server = HTTPServer(("localhost", 3000), Handler)
