@@ -11,5 +11,6 @@ CRUD Functionality
 
 Frontend function triggers request of some data from backend
 
-Backend will run a router function, "@api/update" where any returned data with the associated python function will place said data in the form of a python return at the same endpoint for the frontend to retrieve.
+Backend will run a router function, "@api/update" where any returned data with the associated 
+python function will place said data in the form of a python return at the same endpoint for the frontend to retrieve.
 

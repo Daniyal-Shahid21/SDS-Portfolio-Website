@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "es6",
-    "outDir": "./frontend/dist",
-    "rootDir": "./frontend/scripts",
+    "target": "ES6",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "outDir": "frontend/dist",
+    "rootDir": "frontend/scripts",
     "strict": true
   },
   "include": ["frontend/scripts/**/*"]
