@@ -13,7 +13,7 @@ class Handler(BaseHTTPRequestHandler):
 
         if path.endswith(".html"):
             html = insert_navbar(full_path, "../frontend/navbar.html")
-            html = insert_footer(html, "../frontend/footer.html")  # Apply to already-updated html
+            html = insert_footer(html, "../frontend/footer.html")
             self.send_response(200)
             self.send_header("Content-type", "text/html")
             self.end_headers()

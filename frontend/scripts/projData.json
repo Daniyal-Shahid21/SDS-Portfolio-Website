@@ -1,0 +1,72 @@
+[
+    {
+        "title": "Personal Website",
+        "type": "Software",
+        "description": "../images/NJTPA.png",
+        "skills": ["TS", "Tailwind","Python", "HTTP Server", "GitHub API", "Nodemailer"],
+        "weblink": "https://www.youtube.com",
+        "github": "https://github.com/Daniyal-Shahid21/SDS-Portfolio-Website",
+        "preview": "https://raw.githubusercontent.com/Daniyal-Shahid21/SDS-Portfolio-Website/main/frontend/home.html",
+        "img": ""
+    },
+    {
+        "title": "Calender Planner Assistant",
+        "type": "Software",
+        "description": "../images/NJTPA.png",
+        "skills": [],
+        "weblink": "",
+        "github": "",
+        "preview": "",
+        "img": ""
+    },
+    {
+        "title": "Smart Heat System",
+        "type": "Hardware",
+        "description": "../images/NJTPA.png",
+        "skills": [],
+        "weblink": "",
+        "github": "",
+        "preview": "",
+        "img": ""
+    },
+    {
+        "title": "Athan Clock",
+        "type": "Hardware",
+        "description": "../images/NJTPA.png",
+        "skills": [],
+        "weblink": "",
+        "github": "",
+        "preview": "",
+        "img": ""
+    },
+    {
+        "title": "Soldering Vent System",
+        "type": "Hardware",
+        "description": "../images/NJTPA.png",
+        "skills": [],
+        "weblink": "",
+        "github": "",
+        "preview": "",
+        "img": ""
+    },
+    {
+        "title": "\"Calculator\" App",
+        "type": "Hardware",
+        "description": "../images/NJTPA.png",
+        "skills": [],
+        "weblink": "",
+        "github": "",
+        "preview": "",
+        "img": ""
+    },
+        {
+        "title": "Internet Accessing Directory LLM",
+        "type": "Machine Learning",
+        "description": "../images/NJTPA.png",
+        "skills": [],
+        "weblink": "",
+        "github": "",
+        "preview": "",
+        "img": ""
+    }
+]

@@ -12,19 +12,32 @@
             font-family: 'Karla', sans-serif;
         }
     </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const path = window.location.pathname.split("/").pop();
+        const links = document.querySelectorAll("a.nav-link");
 
+        links.forEach(link => {
+          const href = link.getAttribute("href");
+          if (href === path) {
+            link.classList.add("text-red-400");
+          }
+        });
+      });
+    </script>
 </head>
+
 <body>
-  <div class = "font-karla text-white font-bold">
-    <a href="home.html">-Me</a>
+  <div class="font-karla text-white font-bold text-lg">
+    <a href="home.html" class="nav-link">-Me</a>
     &nbsp;
-    <a href="professional.html">-Experience</a>
+    <a href="professional.html" class="nav-link">-Experience</a>
     &nbsp;
-    <a href="project.html">-Projects</a>
+    <a href="project.html" class="nav-link">-Projects</a>
     &nbsp;
-    <a href="resume.html">-Resume</a>
+    <a href="resume.html" class="nav-link">-Resume</a>
     &nbsp;
-    <a href="blog.html">-Me Again</a>
+    <a href="blog.html" class="nav-link">-Me Again</a>
   </div>
 </body>
 
