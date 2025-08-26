@@ -91,7 +91,6 @@ class Handler(BaseHTTPRequestHandler):
             except Exception as e:
                 self.send_error(500, f"Error serving JS: {e}")
 
-
         elif path.endswith(".json"):
             with open(full_path, "rb") as f:
                 data = f.read()
@@ -99,6 +98,29 @@ class Handler(BaseHTTPRequestHandler):
             self.send_header("Content-type", "application/json")
             self.end_headers()
             self.wfile.write(data)
+            return
+
+        #SERVICES GET FOR JSON BLOG DROPDOWN DARA
+        elif self.path == "/JSONDir":
+            blogDir = "../frontend/scripts/blogData"
+            yearMonthJSON = {}
+
+            if os.path.exists(blogDir):
+                for year in os.listdir(blogDir):
+                    yearPath = os.path.join(blogDir, year)
+                    if os.path.isdir(yearPath):
+                        months = []
+                        for file in os.listdir(yearPath):
+                            if file.endswith(".json"):
+                                month = file.replace(".json", "")
+                                months.append(month)
+                        yearMonthJSON[year] = sorted(months)
+                        print(yearMonthJSON)
+
+            self.send_response(200)
+            self.send_header("Content-type", "application/json")
+            self.end_headers()
+            self.wfile.write(json.dumps(yearMonthJSON).encode("utf-8"))
             return
 
         else:
